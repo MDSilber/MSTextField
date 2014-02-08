@@ -19,6 +19,7 @@
 		28B70A4618A6A9CE00CE95DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B70A2E18A6A9CE00CE95DB /* UIKit.framework */; };
 		28B70A4E18A6A9CE00CE95DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A4C18A6A9CE00CE95DB /* InfoPlist.strings */; };
 		28B70A5018A6A9CE00CE95DB /* MSTextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B70A4F18A6A9CE00CE95DB /* MSTextFieldTests.m */; };
+		28B70A5B18A6AA2100CE95DB /* MSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B70A5A18A6AA2100CE95DB /* MSTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		28B70A4B18A6A9CE00CE95DB /* MSTextFieldTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MSTextFieldTests-Info.plist"; sourceTree = "<group>"; };
 		28B70A4D18A6A9CE00CE95DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		28B70A4F18A6A9CE00CE95DB /* MSTextFieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSTextFieldTests.m; sourceTree = "<group>"; };
+		28B70A5918A6AA2100CE95DB /* MSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTextField.h; sourceTree = "<group>"; };
+		28B70A5A18A6AA2100CE95DB /* MSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 			children = (
 				28B70A3918A6A9CE00CE95DB /* AppDelegate.h */,
 				28B70A3A18A6A9CE00CE95DB /* AppDelegate.m */,
+				28B70A5918A6AA2100CE95DB /* MSTextField.h */,
+				28B70A5A18A6AA2100CE95DB /* MSTextField.m */,
 				28B70A3C18A6A9CE00CE95DB /* Images.xcassets */,
 				28B70A3118A6A9CE00CE95DB /* Supporting Files */,
 			);
@@ -241,6 +246,7 @@
 			files = (
 				28B70A3B18A6A9CE00CE95DB /* AppDelegate.m in Sources */,
 				28B70A3718A6A9CE00CE95DB /* main.m in Sources */,
+				28B70A5B18A6AA2100CE95DB /* MSTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
