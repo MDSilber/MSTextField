@@ -30,10 +30,21 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor darkTextColor];
     
-    MSTextField *textField = [MSTextField emailAddressFieldWithFrame:CGRectMake(0, 50, 0, 0)];
+    MSTextField *textField = [MSTextField dateFieldWithFrame:CGRectMake(0, 50, 0, 0)];
     textField.delegate = self;
     textField.returnKeyType = UIReturnKeyDone;
     [self.view addSubview:textField];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)dismissKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning

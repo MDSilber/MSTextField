@@ -121,7 +121,7 @@
 
 - (BOOL)resignFirstResponder
 {
-    if (self.verificationBlock) {
+    if (self.verificationBlock && [self.text length] >= self.minimumLengthToVerify) {
         if (self.verificationBlock(self.text)) {
             self.inputState = MSTextFieldValidInput;
         } else {
@@ -172,7 +172,7 @@
     MSTextField *dateField = [[MSTextField alloc] initWithFrame:frame];
     dateField.placeholder = @"Enter date";
     dateField.keyboardType = UIKeyboardTypeNumberPad;
-    dateField.minimumLengthToVerify = 0;
+    dateField.minimumLengthToVerify = 1;
     dateField.maxLengthOfInput = 5;
     dateField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
         if ([textField.text length] > textField.maxLengthOfInput) {
@@ -187,6 +187,13 @@
                 textField.text = [NSString stringWithFormat:@"%@/", textField.text];
             }
         }
+    };
+    dateField.verificationBlock = ^BOOL(NSString *text) {
+        
+        if ([text length] != 5) {
+            return NO;
+        }
+        return NSLocationInRange([[text substringToIndex:2] intValue], NSMakeRange(0, 12));
     };
     return dateField;
 }
