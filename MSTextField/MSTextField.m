@@ -126,24 +126,41 @@ typedef enum InputState {
 
 #pragma mark - Factory methods
 
-+ (MSTextField *)phoneNumberField
++ (MSTextField *)phoneNumberFieldWithFrame:(CGRect)frame
 {
     return nil;
 }
 
-+ (MSTextField *)emailAddressField
++ (MSTextField *)emailAddressFieldWithFrame:(CGRect)frame
 {
     return nil;
 }
 
-+ (MSTextField *)creditCardNumberField
++ (MSTextField *)creditCardNumberFieldWithFrame:(CGRect)frame
 {
     return nil;
 }
 
-+ (MSTextField *)dateField:(BOOL)containsMonth
++ (MSTextField *)dateFieldWithFrame:(CGRect)frame
 {
-    return nil;
+    MSTextField *dateField = [[MSTextField alloc] initWithFrame:frame];
+    dateField.placeholder = @"Enter date";
+    dateField.keyboardType = UIKeyboardTypeNumberPad;
+    dateField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
+        if ([textField.text length] > 5) {
+            textField.text = [textField.text substringToIndex:([textField.text length] -1)];
+        }
+        if (newCharacter == '\b') {
+            if ([textField.text length] == 3) {
+                textField.text = [textField.text substringToIndex:2];
+            }
+        } else {
+            if ([textField.text length] == 2) {
+                textField.text = [NSString stringWithFormat:@"%@/", textField.text];
+            }
+        }
+    };
+    return dateField;
 }
 
 @end
