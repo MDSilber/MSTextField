@@ -23,6 +23,14 @@
 		28B70A6118A6FEB400CE95DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B70A6018A6FEB400CE95DB /* ViewController.m */; };
 		28B70A6418A6FF4500CE95DB /* green-checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6218A6FF4500CE95DB /* green-checkmark.png */; };
 		28B70A6518A6FF4500CE95DB /* green-checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6318A6FF4500CE95DB /* green-checkmark@2x.png */; };
+		28B70A6E18A8394C00CE95DB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6618A8394C00CE95DB /* amex.png */; };
+		28B70A6F18A8394C00CE95DB /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6718A8394C00CE95DB /* amex@2x.png */; };
+		28B70A7018A8394C00CE95DB /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6818A8394C00CE95DB /* discover.png */; };
+		28B70A7118A8394C00CE95DB /* discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6918A8394C00CE95DB /* discover@2x.png */; };
+		28B70A7218A8394C00CE95DB /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6A18A8394C00CE95DB /* mastercard.png */; };
+		28B70A7318A8394C00CE95DB /* mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6B18A8394C00CE95DB /* mastercard@2x.png */; };
+		28B70A7418A8394C00CE95DB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6C18A8394C00CE95DB /* visa.png */; };
+		28B70A7518A8394C00CE95DB /* visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B70A6D18A8394C00CE95DB /* visa@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +66,14 @@
 		28B70A6018A6FEB400CE95DB /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		28B70A6218A6FF4500CE95DB /* green-checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-checkmark.png"; sourceTree = "<group>"; };
 		28B70A6318A6FF4500CE95DB /* green-checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-checkmark@2x.png"; sourceTree = "<group>"; };
+		28B70A6618A8394C00CE95DB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amex.png; sourceTree = "<group>"; };
+		28B70A6718A8394C00CE95DB /* amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amex@2x.png"; sourceTree = "<group>"; };
+		28B70A6818A8394C00CE95DB /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
+		28B70A6918A8394C00CE95DB /* discover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "discover@2x.png"; sourceTree = "<group>"; };
+		28B70A6A18A8394C00CE95DB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mastercard.png; sourceTree = "<group>"; };
+		28B70A6B18A8394C00CE95DB /* mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mastercard@2x.png"; sourceTree = "<group>"; };
+		28B70A6C18A8394C00CE95DB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visa.png; sourceTree = "<group>"; };
+		28B70A6D18A8394C00CE95DB /* visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visa@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +148,14 @@
 		28B70A3118A6A9CE00CE95DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28B70A6618A8394C00CE95DB /* amex.png */,
+				28B70A6718A8394C00CE95DB /* amex@2x.png */,
+				28B70A6818A8394C00CE95DB /* discover.png */,
+				28B70A6918A8394C00CE95DB /* discover@2x.png */,
+				28B70A6A18A8394C00CE95DB /* mastercard.png */,
+				28B70A6B18A8394C00CE95DB /* mastercard@2x.png */,
+				28B70A6C18A8394C00CE95DB /* visa.png */,
+				28B70A6D18A8394C00CE95DB /* visa@2x.png */,
 				28B70A6218A6FF4500CE95DB /* green-checkmark.png */,
 				28B70A6318A6FF4500CE95DB /* green-checkmark@2x.png */,
 				28B70A3218A6A9CE00CE95DB /* MSTextField-Info.plist */,
@@ -235,10 +259,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B70A7418A8394C00CE95DB /* visa.png in Resources */,
 				28B70A3518A6A9CE00CE95DB /* InfoPlist.strings in Resources */,
+				28B70A6F18A8394C00CE95DB /* amex@2x.png in Resources */,
+				28B70A7318A8394C00CE95DB /* mastercard@2x.png in Resources */,
+				28B70A7018A8394C00CE95DB /* discover.png in Resources */,
+				28B70A7118A8394C00CE95DB /* discover@2x.png in Resources */,
+				28B70A6E18A8394C00CE95DB /* amex.png in Resources */,
 				28B70A6418A6FF4500CE95DB /* green-checkmark.png in Resources */,
+				28B70A7218A8394C00CE95DB /* mastercard.png in Resources */,
 				28B70A6518A6FF4500CE95DB /* green-checkmark@2x.png in Resources */,
 				28B70A3D18A6A9CE00CE95DB /* Images.xcassets in Resources */,
+				28B70A7518A8394C00CE95DB /* visa@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +493,7 @@
 				28B70A5518A6A9CE00CE95DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28B70A5618A6A9CE00CE95DB /* Build configuration list for PBXNativeTarget "MSTextFieldTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +502,7 @@
 				28B70A5818A6A9CE00CE95DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
