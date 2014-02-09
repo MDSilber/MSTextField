@@ -9,13 +9,13 @@
 @class MSTextField;
 
 typedef enum InputState {
-    ThirstieTextFieldInvalidInput = 0,
-    ThirstieTextFieldUnknownInput = 1,
-    ThirstieTextFieldValidInput = 2
+    MSTextFieldInvalidInput = 0,
+    MSTextFieldUnknownInput = 1,
+    MSTextFieldValidInput = 2
 } InputState;
 
-typedef BOOL(^VerificationBlock)(void);
-typedef void(^FormattingBlock)(MSTextField *textField);
+typedef BOOL(^TextFieldVerificationBlock)(void);
+typedef void(^TextFieldFormattingBlock)(MSTextField *textField);
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -27,6 +27,6 @@ typedef void(^FormattingBlock)(MSTextField *textField);
 @interface MSTextField : UITextField
 @property (nonatomic) BOOL isValid;
 @property (nonatomic) InputState inputState;
-@property (nonatomic, copy) FormattingBlock formattingBlock;
-@property (nonatomic, copy) VerificationBlock verificationBlock;
+@property (nonatomic, copy) TextFieldFormattingBlock formattingBlock;
+@property (nonatomic, copy) TextFieldVerificationBlock verificationBlock;
 @end

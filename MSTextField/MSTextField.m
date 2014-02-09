@@ -41,7 +41,7 @@
         [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         
         self.layer.borderColor = [UIColor redColor].CGColor;
-        self.isValid = YES;
+        self.inputState = MSTextFieldUnknownInput;
     }
     return self;
 }
@@ -66,26 +66,16 @@
         return;
     }
     _inputState = inputState;
-    if (_inputState == ThirstieTextFieldInvalidInput) {
+    if (_inputState == MSTextFieldInvalidInput) {
         self.layer.borderWidth = 2.0f;
         self.checkMark.hidden = YES;
     } else {
         self.layer.borderWidth = 0.0f;
-        if (_inputState == ThirstieTextFieldValidInput) {
+        if (_inputState == MSTextFieldValidInput) {
             self.checkMark.hidden = NO;
         } else {
             self.checkMark.hidden = YES;
         }
-    }
-}
-
-- (void)setIsValid:(BOOL)isValid
-{
-    _isValid = isValid;
-    if (isValid) {
-        self.layer.borderWidth = 0.0f;
-    } else {
-        self.layer.borderWidth = 2.0f;
     }
 }
 
@@ -99,9 +89,9 @@
 {
     if (self.verificationBlock) {
         if (self.verificationBlock()) {
-            self.inputState = ThirstieTextFieldValidInput;
+            self.inputState = MSTextFieldValidInput;
         } else {
-            self.inputState = ThirstieTextFieldInvalidInput;
+            self.inputState = MSTextFieldInvalidInput;
         }
     }
     return [super resignFirstResponder];
