@@ -85,10 +85,16 @@
     if (_inputState == MSTextFieldInvalidInput) {
         self.layer.borderWidth = 2.0f;
         self.checkMark.hidden = YES;
+        if ([self.delegate respondsToSelector:@selector(textFieldReceivedInvalidInput:)]) {
+            [self.delegate textFieldReceivedInvalidInput:self];
+        }
     } else {
         self.layer.borderWidth = 0.0f;
         if (_inputState == MSTextFieldValidInput) {
             self.checkMark.hidden = NO;
+            if ([self.delegate respondsToSelector:@selector(textFieldReceivedValidInput:)]) {
+                [self.delegate textFieldReceivedValidInput:self];
+            }
         } else {
             self.checkMark.hidden = YES;
         }
