@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 Digital-Liquor-Delivery. All rights reserved.
 //
 
+@class MSTextField;
 
 @protocol MSTextFieldDelegate <UITextFieldDelegate>
 @optional
-- (void)textFieldReceivedValidInput;
-- (void)textFieldReceivedInvalidInput;
+- (void)textFieldReceivedValidInput:(MSTextField *)textField;
+- (void)textFieldReceivedInvalidInput:(MSTextField *)textField;
 @end
 
-@class MSTextField;
 
-typedef BOOL(^TextFieldVerificationBlock)(void);
+typedef BOOL(^TextFieldVerificationBlock)(NSString *text);
 typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacter);
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]

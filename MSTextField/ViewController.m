@@ -30,7 +30,9 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor darkTextColor];
     
-    MSTextField *textField = [MSTextField dateFieldWithFrame:CGRectMake(0, 50, 0, 0)];
+    MSTextField *textField = [MSTextField emailAddressFieldWithFrame:CGRectMake(0, 50, 0, 0)];
+    textField.delegate = self;
+    textField.returnKeyType = UIReturnKeyDone;
     [self.view addSubview:textField];
 }
 
@@ -38,6 +40,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end

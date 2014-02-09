@@ -9,6 +9,8 @@
 #import "MSTextField.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define MINIMUM_EMAIL_LENGTH_TO_VERIFY 7
+
 typedef enum InputState {
     MSTextFieldInvalidInput = 0,
     MSTextFieldUnknownInput = 1,
@@ -56,6 +58,11 @@ typedef enum InputState {
         self.layer.borderColor = [UIColor redColor].CGColor;
         self.inputState = MSTextFieldUnknownInput;
         
+        UIImage *checkmarkImage = [UIImage imageNamed:@"green-checkmark"];
+        self.checkMark = [[UIImageView alloc] initWithImage:checkmarkImage];
+        self.checkMark.frame = CGRectMake(self.frame.size.width - checkmarkImage.size.width - 10, floorf((self.frame.size.height - checkmarkImage.size.height)/2.0f), checkmarkImage.size.width, checkmarkImage.size.height);
+        self.checkMark.hidden = YES;
+        [self addSubview:self.checkMark];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
     }
     return self;
@@ -115,7 +122,7 @@ typedef enum InputState {
 - (BOOL)resignFirstResponder
 {
     if (self.verificationBlock) {
-        if (self.verificationBlock()) {
+        if (self.verificationBlock(self.text)) {
             self.inputState = MSTextFieldValidInput;
         } else {
             self.inputState = MSTextFieldInvalidInput;
@@ -133,7 +140,26 @@ typedef enum InputState {
 
 + (MSTextField *)emailAddressFieldWithFrame:(CGRect)frame
 {
-    return nil;
+    MSTextField *emailField = [[MSTextField alloc] initWithFrame:frame];
+    emailField.keyboardType = UIKeyboardTypeEmailAddress;
+    emailField.placeholder = @"Email address";
+    emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+    emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    emailField.minimumLengthToVerify = MINIMUM_EMAIL_LENGTH_TO_VERIFY;
+    emailField.verificationBlock = ^BOOL(NSString *text) {
+        NSString *regExPattern = @"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$";
+        NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+        NSUInteger regExMatches = [regEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
+        if (regExMatches == 0)
+        {
+            return NO;
+        }
+        else
+        {
+            return YES;
+        }
+    };
+    return emailField;
 }
 
 + (MSTextField *)creditCardNumberFieldWithFrame:(CGRect)frame
@@ -146,8 +172,10 @@ typedef enum InputState {
     MSTextField *dateField = [[MSTextField alloc] initWithFrame:frame];
     dateField.placeholder = @"Enter date";
     dateField.keyboardType = UIKeyboardTypeNumberPad;
+    dateField.minimumLengthToVerify = 0;
+    dateField.maxLengthOfInput = 5;
     dateField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
-        if ([textField.text length] > 5) {
+        if ([textField.text length] > textField.maxLengthOfInput) {
             textField.text = [textField.text substringToIndex:([textField.text length] -1)];
         }
         if (newCharacter == '\b') {
