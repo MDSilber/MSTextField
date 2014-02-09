@@ -11,17 +11,11 @@
 
 #define MINIMUM_EMAIL_LENGTH_TO_VERIFY 7
 
-typedef enum InputState {
-    MSTextFieldInvalidInput = 0,
-    MSTextFieldUnknownInput = 1,
-    MSTextFieldValidInput = 2
-} InputState;
-
 @interface MSTextField  ()
 
 @property (nonatomic) NSString *textFieldString;
 @property (nonatomic) UIImageView *checkMark;
-@property (nonatomic) InputState inputState;
+@property (nonatomic, readwrite) InputState inputState;
 
 +(UIView *)paddingView;
 
