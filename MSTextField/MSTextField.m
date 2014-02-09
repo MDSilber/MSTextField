@@ -24,6 +24,10 @@
     return paddingView;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (id)initWithFrame:(CGRect)frame
 {
     frame = CGRectMake(10, frame.origin.y, 300, 50);
@@ -42,6 +46,8 @@
         
         self.layer.borderColor = [UIColor redColor].CGColor;
         self.inputState = MSTextFieldUnknownInput;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:Nil name:UITextFieldTextDidChangeNotification object:nil];
     }
     return self;
 }
@@ -81,7 +87,7 @@
 
 - (BOOL)becomeFirstResponder
 {
-    self.isValid = YES;
+    self.inputState = MSTextFieldUnknownInput;
     return [super becomeFirstResponder];
 }
 

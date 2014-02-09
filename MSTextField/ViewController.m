@@ -28,9 +28,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = [UIColor darkTextColor];
     
     MSTextField *textField = [[MSTextField alloc] initWithFrame:CGRectMake(0, 50, 0, 0)];
+    textField.placeholder = @"Placeholder";
     [self.view addSubview:textField];
 }
 

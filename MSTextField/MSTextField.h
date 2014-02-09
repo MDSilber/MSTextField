@@ -6,6 +6,13 @@
 //  Copyright (c) 2013 Digital-Liquor-Delivery. All rights reserved.
 //
 
+
+@protocol MSTextFieldDelegate <UITextFieldDelegate>
+@optional
+- (void)textFieldReceivedValidInput;
+- (void)textFieldReceivedInvalidInput;
+@end
+
 @class MSTextField;
 
 typedef enum InputState {
@@ -25,7 +32,7 @@ typedef void(^TextFieldFormattingBlock)(MSTextField *textField);
 #import <UIKit/UIKit.h>
 
 @interface MSTextField : UITextField
-@property (nonatomic) BOOL isValid;
+@property (nonatomic, weak) id<MSTextFieldDelegate> delegate;
 @property (nonatomic) InputState inputState;
 @property (nonatomic, copy) TextFieldFormattingBlock formattingBlock;
 @property (nonatomic, copy) TextFieldVerificationBlock verificationBlock;

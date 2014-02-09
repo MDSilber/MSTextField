@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSTextField.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <MSTextFieldDelegate>
 
 @end
