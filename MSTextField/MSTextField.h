@@ -15,12 +15,6 @@
 
 @class MSTextField;
 
-typedef enum InputState {
-    MSTextFieldInvalidInput = 0,
-    MSTextFieldUnknownInput = 1,
-    MSTextFieldValidInput = 2
-} InputState;
-
 typedef BOOL(^TextFieldVerificationBlock)(void);
 typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacter);
 
@@ -33,7 +27,7 @@ typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacte
 
 @interface MSTextField : UITextField
 @property (nonatomic, weak) id<MSTextFieldDelegate> delegate;
-@property (nonatomic) InputState inputState;
 @property (nonatomic, copy) TextFieldFormattingBlock formattingBlock;
 @property (nonatomic, copy) TextFieldVerificationBlock verificationBlock;
+@property (nonatomic) NSInteger minimumLengthToVerify;
 @end

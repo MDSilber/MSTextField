@@ -9,10 +9,18 @@
 #import "MSTextField.h"
 #import <QuartzCore/QuartzCore.h>
 
+typedef enum InputState {
+    MSTextFieldInvalidInput = 0,
+    MSTextFieldUnknownInput = 1,
+    MSTextFieldValidInput = 2
+} InputState;
+
 @interface MSTextField  ()
 
 @property (nonatomic) NSString *textFieldString;
 @property (nonatomic) UIImageView *checkMark;
+@property (nonatomic) InputState inputState;
+
 +(UIView *)paddingView;
 
 @end
