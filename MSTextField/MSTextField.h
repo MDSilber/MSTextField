@@ -30,4 +30,12 @@ typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacte
 @property (nonatomic, copy) TextFieldFormattingBlock formattingBlock;
 @property (nonatomic, copy) TextFieldVerificationBlock verificationBlock;
 @property (nonatomic) NSInteger minimumLengthToVerify;
+@property (nonatomic) NSInteger maxLengthOfInput;
+
++ (MSTextField *)phoneNumberField;
++ (MSTextField *)emailAddressField;
++ (MSTextField *)creditCardNumberField;
++ (MSTextField *)dateField:(BOOL)containsMonth;
+
+
 @end

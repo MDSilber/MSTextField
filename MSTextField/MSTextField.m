@@ -94,6 +94,8 @@ typedef enum InputState {
     }
 }
 
+#pragma mark - Text field methods
+
 - (void)textDidChange:(NSNotification *)notification
 {
     NSLog(@"YTFD");
@@ -120,6 +122,28 @@ typedef enum InputState {
         }
     }
     return [super resignFirstResponder];
+}
+
+#pragma mark - Factory methods
+
++ (MSTextField *)phoneNumberField
+{
+    return nil;
+}
+
++ (MSTextField *)emailAddressField
+{
+    return nil;
+}
+
++ (MSTextField *)creditCardNumberField
+{
+    return nil;
+}
+
++ (MSTextField *)dateField:(BOOL)containsMonth
+{
+    return nil;
 }
 
 @end

@@ -32,6 +32,22 @@
     
     MSTextField *textField = [[MSTextField alloc] initWithFrame:CGRectMake(0, 50, 0, 0)];
     textField.placeholder = @"Placeholder";
+    // Date field test
+    /*textField.keyboardType = UIKeyboardTypeNumberPad;
+    textField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
+        if ([textField.text length] > 5) {
+            textField.text = [textField.text substringToIndex:([textField.text length] -1)];
+        }
+        if (newCharacter == '\b') {
+            if ([textField.text length] == 4) {
+                textField.text = [textField.text substringToIndex:2];
+            }
+        } else {
+            if ([textField.text length] == 2) {
+                textField.text = [NSString stringWithFormat:@"%@/", textField.text];
+            }
+        }
+    };*/
     [self.view addSubview:textField];
 }
 
