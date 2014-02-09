@@ -22,7 +22,7 @@ typedef enum InputState {
 } InputState;
 
 typedef BOOL(^TextFieldVerificationBlock)(void);
-typedef void(^TextFieldFormattingBlock)(MSTextField *textField);
+typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacter);
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 

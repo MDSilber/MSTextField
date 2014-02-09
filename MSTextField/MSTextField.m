@@ -11,6 +11,7 @@
 
 @interface MSTextField  ()
 
+@property (nonatomic) NSString *textFieldString;
 @property (nonatomic) UIImageView *checkMark;
 +(UIView *)paddingView;
 
@@ -47,7 +48,7 @@
         self.layer.borderColor = [UIColor redColor].CGColor;
         self.inputState = MSTextFieldUnknownInput;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:Nil name:UITextFieldTextDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
     }
     return self;
 }
@@ -83,6 +84,16 @@
             self.checkMark.hidden = YES;
         }
     }
+}
+
+- (void)textDidChange:(NSNotification *)notification
+{
+    NSLog(@"YTFD");
+    char newCharacter = ([self.text length] > [self.textFieldString length]) ? [self.text characterAtIndex:([self.text length] -1)] : '\b';
+    if (_formattingBlock) {
+        _formattingBlock(self, newCharacter);
+    }
+    self.textFieldString = ((UITextField *)(notification.object)).text;
 }
 
 - (BOOL)becomeFirstResponder
