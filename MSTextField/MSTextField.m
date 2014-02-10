@@ -232,7 +232,7 @@
         self.validInputImage = [UIImage imageNamed:@"green-checkmark"];
         self.validInputImageView = [[UIImageView alloc] initWithImage:_validInputImage];
         self.validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
-        self.validInputImageView.hidden = YES;
+        self.validInputImageView.alpha = 0.0f;
         [self addSubview:self.validInputImageView];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
     }
@@ -261,19 +261,21 @@
     _inputState = inputState;
     if (_inputState == MSTextFieldInvalidInput) {
         self.layer.borderWidth = 2.0f;
-        self.validInputImageView.hidden = YES;
+        self.validInputImageView.alpha = 0.0f;
         if ([self.delegate respondsToSelector:@selector(textFieldReceivedInvalidInput:)]) {
             [self.delegate textFieldReceivedInvalidInput:self];
         }
     } else {
         self.layer.borderWidth = 0.0f;
         if (_inputState == MSTextFieldValidInput) {
-            self.validInputImageView.hidden = NO;
+            [UIView animateWithDuration:0.5f animations:^{
+                self.validInputImageView.alpha = 1.0f;
+            } completion:nil];
             if ([self.delegate respondsToSelector:@selector(textFieldReceivedValidInput:)]) {
                 [self.delegate textFieldReceivedValidInput:self];
             }
         } else {
-            self.validInputImageView.hidden = YES;
+            self.validInputImageView.alpha = 0.0f;
         }
     }
 }
