@@ -11,6 +11,7 @@
 
 #define MINIMUM_EMAIL_LENGTH_TO_VERIFY 7
 #define MAX_PHONE_NUMBER_LENGTH 14
+#define kMagicSubtractionNumber 48
 
 #define AMEX_IMAGE [UIImage imageNamed:@"amex"]
 #define DISCOVER_IMAGE [UIImage imageNamed:@"discover"]
@@ -93,6 +94,61 @@
     creditCardField.keyboardType = UIKeyboardTypeNumberPad;
     creditCardField.placeholder = @"Credit card number";
     creditCardField.maxLengthOfInput = 19;
+    creditCardField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
+        if ([textField.text length] == 0) {
+            return;
+        }
+        if (newCharacter == '\b') {
+            //American express
+            if ([textField.text characterAtIndex:0] == '3') {
+                if ([textField.text length] == 6 || [textField.text length] == 13) {
+                    textField.text = [textField.text substringToIndex:(textField.text.length - 2)];
+                }
+            } else {
+                if ([textField.text length] == 6 || [textField.text length] == 11 || [textField.text length] == 16) {
+                    textField.text = [textField.text substringToIndex:(textField.text.length - 2)];
+                }
+            }
+        } else {
+            //American express
+            if ([textField.text characterAtIndex:0] == '3') {
+                if ([textField.text length] == 4 || [textField.text length] == 11) {
+                    textField.text = [NSString stringWithFormat:@"%@-", textField.text];
+                }
+            } else {
+                if ([textField.text length] == 4 || [textField.text length] == 9 || [textField.text length] == 14) {
+                    textField.text = [NSString stringWithFormat:@"%@-", textField.text];
+                }
+            }
+        }
+    };
+    creditCardField.verificationBlock = ^BOOL(NSString *text) {
+        NSString *cardNumber = [[text componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+        int luhnNumber = 0;
+        
+		// I'm running through my string backwards
+        for (int i=0; i<[cardNumber length]; i++) {
+            NSUInteger count = [cardNumber length]-1; // Prevents Bounds Error and makes characterAtIndex easier to read
+			int doubled = [[NSNumber numberWithUnsignedChar:[cardNumber characterAtIndex:count-i]] intValue] - kMagicSubtractionNumber;
+            if (i % 2) {
+                doubled = doubled*2;
+            }
+            
+			NSString *double_digit = [NSString stringWithFormat:@"%d",doubled];
+            
+            if ([[NSString stringWithFormat:@"%d",doubled] length] > 1) {   luhnNumber = luhnNumber + [[NSNumber numberWithUnsignedChar:[double_digit characterAtIndex:0]] intValue]-kMagicSubtractionNumber;
+                luhnNumber = luhnNumber + [[NSNumber numberWithUnsignedChar:[double_digit characterAtIndex:1]] intValue]-kMagicSubtractionNumber;
+            } else {
+                luhnNumber = luhnNumber + doubled;
+            }
+        }
+        
+        if (luhnNumber%10 == 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    };
     return creditCardField;
 }
 

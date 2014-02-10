@@ -30,7 +30,7 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor darkTextColor];
     
-    MSTextField *textField = [MSTextField phoneNumberFieldWithFrame:CGRectMake(0, 50, 0, 0)];
+    MSTextField *textField = [MSTextField creditCardNumberFieldWithFrame:CGRectMake(0, 50, 0, 0)];
     [self.view addSubview:textField];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
