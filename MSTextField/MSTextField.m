@@ -12,6 +12,11 @@
 #define MINIMUM_EMAIL_LENGTH_TO_VERIFY 7
 #define MAX_PHONE_NUMBER_LENGTH 14
 
+#define AMEX_IMAGE [UIImage imageNamed:@"amex"]
+#define DISCOVER_IMAGE [UIImage imageNamed:@"discover"]
+#define MASTERCARD_IMAGE [UIImage imageNamed:@"mastercard"]
+#define VISA_IMAGE [UIImage imageNamed:@"visa"]
+
 @interface MSTextField  ()
 
 @property (nonatomic) NSString *textFieldString;
@@ -52,7 +57,9 @@
         
         self.invalidInputBorderColor = UIColorFromRGB(0xB50000);
         self.inputState = MSTextFieldUnknownInput;
-        
+        self.minimumLengthToVerify = 1;
+        self.maxLengthOfInput = MAX_INPUT;
+
         self.validInputImage = [UIImage imageNamed:@"green-checkmark"];
         self.validInputImageView = [[UIImageView alloc] initWithImage:_validInputImage];
         self.validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
@@ -123,11 +130,15 @@
 
 - (void)textDidChange:(NSNotification *)notification
 {
-    char newCharacter = ([self.text length] > [self.textFieldString length]) ? [self.text characterAtIndex:([self.text length] -1)] : '\b';
-    if (_formattingBlock) {
-        _formattingBlock(self, newCharacter);
+    if ([((UITextField *)(notification.object)).text length] > self.maxLengthOfInput) {
+        ((UITextField *)(notification.object)).text = self.textFieldString;
+    } else {
+        char newCharacter = ([self.text length] > [self.textFieldString length]) ? [self.text characterAtIndex:([self.text length] -1)] : '\b';
+        if (_formattingBlock) {
+            _formattingBlock(self, newCharacter);
+        }
+        self.textFieldString = ((UITextField *)(notification.object)).text;
     }
-    self.textFieldString = ((UITextField *)(notification.object)).text;
 }
 
 - (BOOL)becomeFirstResponder
@@ -155,7 +166,6 @@
     MSTextField *phoneNumberField = [[MSTextField alloc] initWithFrame:frame];
     phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
     phoneNumberField.placeholder = @"Phone number";
-    phoneNumberField.minimumLengthToVerify = 1;
     phoneNumberField.maxLengthOfInput = MAX_PHONE_NUMBER_LENGTH;
     phoneNumberField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
         if (newCharacter == '\b') {
@@ -209,7 +219,11 @@
 
 + (MSTextField *)creditCardNumberFieldWithFrame:(CGRect)frame
 {
-    return nil;
+    MSTextField *creditCardField = [[MSTextField alloc] initWithFrame:frame];
+    creditCardField.keyboardType = UIKeyboardTypeNumberPad;
+    creditCardField.placeholder = @"Credit card number";
+    creditCardField.maxLengthOfInput = 19;
+    return creditCardField;
 }
 
 + (MSTextField *)dateFieldWithFrame:(CGRect)frame
@@ -217,12 +231,8 @@
     MSTextField *dateField = [[MSTextField alloc] initWithFrame:frame];
     dateField.placeholder = @"Enter date";
     dateField.keyboardType = UIKeyboardTypeNumberPad;
-    dateField.minimumLengthToVerify = 1;
     dateField.maxLengthOfInput = 5;
     dateField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
-        if ([textField.text length] > textField.maxLengthOfInput) {
-            textField.text = [textField.text substringToIndex:([textField.text length] -1)];
-        }
         if (newCharacter == '\b') {
             if ([textField.text length] == 3) {
                 textField.text = [textField.text substringToIndex:2];
