@@ -105,7 +105,6 @@
 
 - (void)textDidChange:(NSNotification *)notification
 {
-    NSLog(@"YTFD");
     char newCharacter = ([self.text length] > [self.textFieldString length]) ? [self.text characterAtIndex:([self.text length] -1)] : '\b';
     if (_formattingBlock) {
         _formattingBlock(self, newCharacter);
@@ -121,8 +120,8 @@
 
 - (BOOL)resignFirstResponder
 {
-    if (self.verificationBlock && [self.text length] >= self.minimumLengthToVerify) {
-        if (self.verificationBlock(self.text)) {
+    if (_verificationBlock && [self.text length] >= self.minimumLengthToVerify) {
+        if (_verificationBlock(self.text)) {
             self.inputState = MSTextFieldValidInput;
         } else {
             self.inputState = MSTextFieldInvalidInput;
