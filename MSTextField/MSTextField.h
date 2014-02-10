@@ -1,9 +1,9 @@
 //
-//  ThirstieTextField.h
+//  MSTextfield.h
 //  Thirstie
 //
-//  Created by Mason Silber on 8/14/13.
-//  Copyright (c) 2013 Digital-Liquor-Delivery. All rights reserved.
+//  Created by Mason Silber on 2/8/14.
+//  Copyright (c) 2014 Mason Silber. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -38,6 +38,8 @@ typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacte
 @property (nonatomic) NSInteger minimumLengthToVerify;
 @property (nonatomic) NSInteger maxLengthOfInput;
 @property (nonatomic, readonly) InputState inputState;
+@property (nonatomic) UIColor *invalidInputBorderColor;
+@property (nonatomic) UIImage *validInputImage;
 
 + (MSTextField *)phoneNumberFieldWithFrame:(CGRect)frame;
 + (MSTextField *)emailAddressFieldWithFrame:(CGRect)frame;

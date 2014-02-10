@@ -1,9 +1,9 @@
 //
-//  ThirstieTextField.m
+//  MSTextfield.m
 //  Thirstie
 //
-//  Created by Mason Silber on 8/14/13.
-//  Copyright (c) 2013 Digital-Liquor-Delivery. All rights reserved.
+//  Created by Mason Silber on 2/8/14.
+//  Copyright (c) 2014 Mason Silber. All rights reserved.
 //
 
 #import "MSTextField.h"
@@ -14,7 +14,7 @@
 @interface MSTextField  ()
 
 @property (nonatomic) NSString *textFieldString;
-@property (nonatomic) UIImageView *checkMark;
+@property (nonatomic) UIImageView *validInputImageView;
 @property (nonatomic, readwrite) InputState inputState;
 
 +(UIView *)paddingView;
@@ -49,14 +49,14 @@
         [self setTextAlignment:NSTextAlignmentLeft];
         [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         
-        self.layer.borderColor = [UIColor redColor].CGColor;
+        self.invalidInputBorderColor = UIColorFromRGB(0xB50000);
         self.inputState = MSTextFieldUnknownInput;
         
-        UIImage *checkmarkImage = [UIImage imageNamed:@"green-checkmark"];
-        self.checkMark = [[UIImageView alloc] initWithImage:checkmarkImage];
-        self.checkMark.frame = CGRectMake(self.frame.size.width - checkmarkImage.size.width - 10, floorf((self.frame.size.height - checkmarkImage.size.height)/2.0f), checkmarkImage.size.width, checkmarkImage.size.height);
-        self.checkMark.hidden = YES;
-        [self addSubview:self.checkMark];
+        self.validInputImage = [UIImage imageNamed:@"green-checkmark"];
+        self.validInputImageView = [[UIImageView alloc] initWithImage:_validInputImage];
+        self.validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
+        self.validInputImageView.hidden = YES;
+        [self addSubview:self.validInputImageView];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
     }
     return self;
@@ -84,20 +84,37 @@
     _inputState = inputState;
     if (_inputState == MSTextFieldInvalidInput) {
         self.layer.borderWidth = 2.0f;
-        self.checkMark.hidden = YES;
+        self.validInputImageView.hidden = YES;
         if ([self.delegate respondsToSelector:@selector(textFieldReceivedInvalidInput:)]) {
             [self.delegate textFieldReceivedInvalidInput:self];
         }
     } else {
         self.layer.borderWidth = 0.0f;
         if (_inputState == MSTextFieldValidInput) {
-            self.checkMark.hidden = NO;
+            self.validInputImageView.hidden = NO;
             if ([self.delegate respondsToSelector:@selector(textFieldReceivedValidInput:)]) {
                 [self.delegate textFieldReceivedValidInput:self];
             }
         } else {
-            self.checkMark.hidden = YES;
+            self.validInputImageView.hidden = YES;
         }
+    }
+}
+
+- (void)setValidInputImage:(UIImage *)validInputImage
+{
+    if (_validInputImage != validInputImage) {
+        _validInputImage = validInputImage;
+        _validInputImageView.image = validInputImage;
+        _validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
+    }
+}
+
+- (void)setInvalidInputBorderColor:(UIColor *)invalidInputBorderColor
+{
+    if (_invalidInputBorderColor != invalidInputBorderColor) {
+        _invalidInputBorderColor = invalidInputBorderColor;
+        self.layer.borderColor = invalidInputBorderColor.CGColor;
     }
 }
 
