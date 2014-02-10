@@ -98,6 +98,22 @@
         if ([textField.text length] == 0) {
             return;
         }
+        switch ([textField.text characterAtIndex:0]) {
+            case '3':
+                textField.validInputImage = [UIImage imageNamed:@"amex"];
+                break;
+            case '4':
+                textField.validInputImage = [UIImage imageNamed:@"visa"];
+                break;
+            case '5':
+                textField.validInputImage = [UIImage imageNamed:@"mastercard"];
+                break;
+            case '6':
+                textField.validInputImage = [UIImage imageNamed:@"discover"];
+                break;
+            default:
+                break;
+        }
         if (newCharacter == '\b') {
             //American express
             if ([textField.text characterAtIndex:0] == '3') {
@@ -266,7 +282,7 @@
 {
     if (_validInputImage != validInputImage) {
         _validInputImage = validInputImage;
-        _validInputImageView.image = validInputImage;
+        _validInputImageView.image = _validInputImage;
         _validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
     }
 }
