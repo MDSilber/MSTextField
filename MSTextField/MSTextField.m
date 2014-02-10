@@ -305,8 +305,10 @@
         ((UITextField *)(notification.object)).text = self.textFieldString;
     } else {
         char newCharacter = ([self.text length] > [self.textFieldString length]) ? [self.text characterAtIndex:([self.text length] -1)] : '\b';
-        if (_formattingBlock) {
-            _formattingBlock(self, newCharacter);
+        __weak typeof(self) weakSelf = self;
+        typeof(self) strongSelf = weakSelf;
+        if (_formattingBlock && strongSelf) {
+            _formattingBlock(strongSelf, newCharacter);
         }
         self.textFieldString = ((UITextField *)(notification.object)).text;
     }
