@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define MINIMUM_EMAIL_LENGTH_TO_VERIFY 7
+#define MAX_PHONE_NUMBER_LENGTH 14
 
 @interface MSTextField  ()
 
@@ -151,7 +152,35 @@
 
 + (MSTextField *)phoneNumberFieldWithFrame:(CGRect)frame
 {
-    return nil;
+    MSTextField *phoneNumberField = [[MSTextField alloc] initWithFrame:frame];
+    phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
+    phoneNumberField.placeholder = @"Phone number";
+    phoneNumberField.minimumLengthToVerify = 1;
+    phoneNumberField.maxLengthOfInput = MAX_PHONE_NUMBER_LENGTH;
+    phoneNumberField.formattingBlock = ^(MSTextField *textField, char newCharacter) {
+        if (newCharacter == '\b') {
+            if (textField.text.length == 1) {
+                textField.text = @"";
+            } else if (textField.text.length == 5) {
+                textField.text = [textField.text substringToIndex:(textField.text.length - 2)];
+            } else if (textField.text.length == 9) {
+                textField.text = [textField.text substringToIndex:(textField.text.length - 1)];
+            }
+        } else {
+            if (textField.text.length == 1) {
+                textField.text = [NSString stringWithFormat:@"(%@", textField.text];
+            } else if (textField.text.length == 4) {
+                textField.text = [NSString stringWithFormat:@"%@) ", textField.text];
+            } else if (textField.text.length == 9) {
+                textField.text = [NSString stringWithFormat:@"%@-", textField.text];
+            }
+        }
+    };
+    phoneNumberField.verificationBlock = ^BOOL(NSString *text) {
+        NSString *unformattedPhoneNumber = [[text componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+        return [unformattedPhoneNumber length] == 10 && [unformattedPhoneNumber rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet] options:0].location == NSNotFound;
+    };
+    return phoneNumberField;
 }
 
 + (MSTextField *)emailAddressFieldWithFrame:(CGRect)frame
