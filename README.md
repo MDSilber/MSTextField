@@ -3,7 +3,9 @@ MSTextField
 
 MSTextField is a UITextField subclass that allows developers to pass in custom formatting and verification blocks as instance variables. It has a minimum length to verify parmaeter (so that your text field doesn't try to verify blank input) and max length parameter (to prevent a user from inputting something longer than desired). You may also set the validation image invalid input warning border color to be whatever you want (the defaults are a green checkmark and a darkish red respectively).
 
-To use it, simply add MSTextField to your project!
+To use it, simply add `pod 'MSTextField'` to your podfile and run `pod install`. You can also just download the source and add it to your project.
+
+Note: If you don't have CocoaPods integrated in your projects, you can find out how to add it at http://www.cocoapods.org
 
 Here's an example of how it's used, taken from one of the factory methods that creates a text field to handle dates (month and day only):
 
