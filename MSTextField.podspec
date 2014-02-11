@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "MSTextField"
   s.version      = "1.0.0"
-  s.summary      = "A UITextField subclass that takes custom formatting and verification blocks"
+  s.summary      = "A UITextField subclass that takes custom formatting and verification blocks."
   s.homepage     = "https://github.com/MDSilber/MSTextField"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Mason Silber" => "mdsilber1@gmail.com" }
