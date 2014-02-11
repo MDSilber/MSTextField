@@ -190,7 +190,7 @@
         if ([text length] != 5) {
             return NO;
         }
-        return NSLocationInRange([[text substringToIndex:2] intValue], NSMakeRange(0, 12));
+        return NSLocationInRange([[text substringToIndex:2] intValue], NSMakeRange(1, 12));
     };
     return dateField;
 }
