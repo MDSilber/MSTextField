@@ -47,9 +47,7 @@
 - (void)_toggleFieldType:(UISegmentedControl *)sender
 {
     [self _dismissKeyboard];
-    if (self.currentTextField.superview) {
-        [self.currentTextField removeFromSuperview];
-    }
+    [self.currentTextField removeFromSuperview];
 
     CGRect frame = CGRectMake(0, 100, 0, 0);
     switch (sender.selectedSegmentIndex) {

@@ -117,12 +117,12 @@
         if (newCharacter == '\b') {
             //American express
             if ([textField.text characterAtIndex:0] == '3') {
-                if ([textField.text length] == 6 || [textField.text length] == 13) {
-                    textField.text = [textField.text substringToIndex:(textField.text.length - 2)];
+                if ([textField.text length] == 4 || [textField.text length] == 11) {
+                    textField.text = [textField.text substringToIndex:(textField.text.length - 1)];
                 }
             } else {
-                if ([textField.text length] == 6 || [textField.text length] == 11 || [textField.text length] == 16) {
-                    textField.text = [textField.text substringToIndex:(textField.text.length - 2)];
+                if ([textField.text length] == 4 || [textField.text length] == 9 || [textField.text length] == 14) {
+                    textField.text = [textField.text substringToIndex:(textField.text.length - 1)];
                 }
             }
         } else {
