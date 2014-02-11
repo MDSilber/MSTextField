@@ -214,9 +214,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self setBackgroundColor:UIColorFromRGB(0xdedede)];
         [self setTextColor:[UIColor blackColor]];
-        [self setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f]];
         [self setClearButtonMode:UITextFieldViewModeWhileEditing];
         [[self layer] setCornerRadius:3.5f];
         [self setLeftView:[MSTextField paddingView]];
@@ -237,20 +235,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
     }
     return self;
-}
-
--(void)drawPlaceholderInRect:(CGRect)rect
-{
-    if (IS_IOS7) {
-        CGSize placeHolderSize = [self.placeholder boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:12.0f]} context:nil].size;
-        rect.origin.y = (self.frame.size.height - placeHolderSize.height)/2;
-        rect.size.height = placeHolderSize.height;
-    }
-    
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.alignment = self.textAlignment;
-    paragraphStyle.lineBreakMode = NSLineBreakByClipping;
-    [self.placeholder drawInRect:rect withAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:12.0f], NSParagraphStyleAttributeName: paragraphStyle, NSForegroundColorAttributeName: UIColorFromRGB(0x787878)}];
 }
 
 - (void)setInputState:(InputState)inputState
