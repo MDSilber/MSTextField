@@ -1,7 +1,7 @@
 MSTextField
 ===========
 
-MSTextField is a UITextField subclass that allows developers to pass in custom formatting and verification blocks as instance variables. 
+MSTextField is a UITextField subclass that allows developers to pass in custom formatting and verification blocks as instance variables. It has a minimum length to verify parmaeter (so that your text field doesn't try to verify blank input) and max length parameter (to prevent a user from inputting something longer than desired). You may also set the validation image invalid input warning border color to be whatever you want (the defaults are a green checkmark and a darkish red respectively).
 
 To use it, simply add MSTextField to your project!
 
@@ -31,6 +31,11 @@ Here's an example of how it's used, taken from one of the factory methods that c
     };
 
 As seen above, the formatting block automatically adds a slash after the second character is typed, and the verification block checks to make sure that the string is the correct length and that the month component is a valid month. 
+
+Additionally, with MSTextField comes a "subclass" of UITextFieldDelegate called MSTextFieldDelegate, which provides to additional optional delegate methods that you can implement:
+
+    - (void)textFieldReceivedValidInput:(MSTextField *)textField;
+    - (void)textFieldReceivedInvalidInput:(MSTextField *)textField;
 
 It's that simple! MSTextField comes with class methods that generate date fields (like the one above), phone number fields, email address fields, and credit card fields. However, you can always create your own and use those methods as examples.
 
