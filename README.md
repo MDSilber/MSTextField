@@ -34,7 +34,7 @@ Here's an example of how it's used, taken from one of the factory methods that c
 
 As seen above, the formatting block automatically adds a slash after the second character is typed, and the verification block checks to make sure that the string is the correct length and that the month component is a valid month. 
 
-Additionally, with MSTextField comes a "subclass" of UITextFieldDelegate called MSTextFieldDelegate, which provides to additional optional delegate methods that you can implement:
+Additionally, MSTextField includes MSTextFieldDelegate, a protocol that conforms to UITextFieldDelegate, which provides to additional optional delegate methods that you can implement:
 
     - (void)textFieldReceivedValidInput:(MSTextField *)textField;
     - (void)textFieldReceivedInvalidInput:(MSTextField *)textField;
