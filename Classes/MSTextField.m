@@ -22,7 +22,7 @@
 
 @property (nonatomic) NSString *textFieldString;
 @property (nonatomic) UIImageView *validInputImageView;
-@property (nonatomic, readwrite) InputState inputState;
+@property (nonatomic, readwrite) MSInputState inputState;
 
 +(UIView *)paddingView;
 
@@ -238,7 +238,7 @@
     return self;
 }
 
-- (void)setInputState:(InputState)inputState
+- (void)setInputState:(MSInputState)inputState
 {
     if (self.inputState == inputState) {
         return;
@@ -247,8 +247,8 @@
     if (_inputState == MSTextFieldInvalidInput) {
         self.layer.borderWidth = 2.0f;
         self.validInputImageView.alpha = 0.0f;
-        if ([self.delegate respondsToSelector:@selector(textFieldReceivedInvalidInput:)]) {
-            [self.delegate textFieldReceivedInvalidInput:self];
+        if ([self.delegate respondsToSelector:@selector(textFieldDidReceiveInvalidInput:)]) {
+            [self.delegate textFieldDidReceiveInvalidInput:self];
         }
     } else {
         self.layer.borderWidth = 0.0f;
@@ -256,8 +256,8 @@
             [UIView animateWithDuration:0.5f animations:^{
                 self.validInputImageView.alpha = 1.0f;
             } completion:nil];
-            if ([self.delegate respondsToSelector:@selector(textFieldReceivedValidInput:)]) {
-                [self.delegate textFieldReceivedValidInput:self];
+            if ([self.delegate respondsToSelector:@selector(textFieldDidReceiveValidInput:)]) {
+                [self.delegate textFieldDidReceiveValidInput:self];
             }
         } else {
             self.validInputImageView.alpha = 0.0f;

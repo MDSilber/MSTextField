@@ -18,11 +18,11 @@
 - (void)textFieldDidReceiveInvalidInput:(MSTextField *)textField;
 @end
 
-typedef enum InputState {
+typedef enum MSInputState {
     MSTextFieldInvalidInput = 0,
     MSTextFieldUnknownInput = 1,
     MSTextFieldValidInput = 2
-} InputState;
+} MSInputState;
 
 typedef BOOL(^TextFieldVerificationBlock)(NSString *text);
 typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacter);
@@ -34,7 +34,7 @@ typedef void(^TextFieldFormattingBlock)(MSTextField *textField, char newCharacte
 @property (nonatomic, copy) TextFieldVerificationBlock verificationBlock;
 @property (nonatomic) NSInteger minimumLengthToVerify;
 @property (nonatomic) NSInteger maxLengthOfInput;
-@property (nonatomic, readonly) InputState inputState;
+@property (nonatomic, readonly) MSInputState inputState;
 @property (nonatomic) UIColor *invalidInputBorderColor;
 @property (nonatomic) UIImage *validInputImage;
 
