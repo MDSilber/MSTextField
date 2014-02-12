@@ -14,8 +14,8 @@
 
 @protocol MSTextFieldDelegate <UITextFieldDelegate>
 @optional
-- (void)textFieldReceivedValidInput:(MSTextField *)textField;
-- (void)textFieldReceivedInvalidInput:(MSTextField *)textField;
+- (void)textFieldDidReceiveValidInput:(MSTextField *)textField;
+- (void)textFieldDidReceiveInvalidInput:(MSTextField *)textField;
 @end
 
 typedef enum InputState {
