@@ -286,6 +286,9 @@
 
 - (void)textDidChange:(NSNotification *)notification
 {
+    if (![notification.object isEqual:self]) {
+        return;
+    }
     if ([((UITextField *)(notification.object)).text length] > self.maxLengthOfInput) {
         ((UITextField *)(notification.object)).text = self.textFieldString;
     } else {
